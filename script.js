@@ -152,12 +152,3 @@ const GamePlay = (function () {
     checkWin,
   };
 })();
-
-// Testing codes
-// GamePlay.start("Dulip", "Arosha");
-// GamePlay.addMark("x", 0);
-// GamePlay.addMark("x", 1);
-// GamePlay.addMark("x", 2);
-// const result = GamePlay.checkWin("x");
-// console.log(result.winStatus);
-// console.log(result.player.getName());
