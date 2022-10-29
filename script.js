@@ -66,7 +66,6 @@ const GamePlay = (function () {
   function start(xPlayer, oPlayer) {
     _xPlayer = playerFactory(xPlayer, "x");
     _oPlayer = playerFactory(oPlayer, "o");
-    _gameBoard = GameBoard.getGameBoard();
   }
 
   // add mark
@@ -151,4 +150,57 @@ const GamePlay = (function () {
     getGameBoard,
     checkWin,
   };
+})();
+
+// Display Controller
+const DisplayController = (function () {
+  // marks
+  let _xMark;
+  let _oMark;
+
+  // cache dom
+  const startBtn = document.querySelector("#startBtn");
+  const startPage = document.querySelector("#startPage");
+  const inputPlayerX = document.querySelector("#xName");
+  const inputPlayerO = document.querySelector("#oName");
+  const gamePlayArea = document.querySelector("#gamePlayArea");
+  const displayXPlayer = document.querySelector("#displayXPlayer");
+  const displayOPlayer = document.querySelector("#displayOPlayer");
+  const board = document.querySelector("#board");
+  const cells = document.querySelectorAll(".cell");
+
+  // Event - start the game
+  startBtn.addEventListener("click", start);
+
+  // Event functions
+  function start() {
+    // get the player names
+    const xPlayer = inputPlayerX.value === "" ? "John" : inputPlayerX.value;
+    const oPlayer = inputPlayerO.value === "" ? "Doe" : inputPlayerO.value;
+
+    GamePlay.start(xPlayer, oPlayer);
+
+    //set marks flags
+    _xMark = GamePlay.getXPlayer().getMark();
+    _oMark = GamePlay.getOPlayer().getMark();
+
+    // hide starting page
+    startPage.classList.toggle("hidden");
+    // display game play area page
+    gamePlayArea.classList.toggle("hidden");
+
+    // set players names
+    displayXPlayer.textContent = GamePlay.getXPlayer().getName();
+    displayOPlayer.textContent = GamePlay.getOPlayer().getName();
+
+    // set the board starting mark
+    board.classList.add(_xMark);
+
+    // set click events for all the cells
+    cells.forEach((cell) => {
+      cell.addEventListener("click", addMark);
+    });
+  }
+
+  function addMark() {}
 })();

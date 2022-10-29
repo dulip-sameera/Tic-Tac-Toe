@@ -10,50 +10,50 @@
   <body>
     <div class="container">
       <!-- Starting Page -->
-      <div class="start">
+      <div class="start" id="startPage">
         <h1 class="title">Tic-Tac-Toe</h1>
 
         <h2 class="sub-title">Enter players names</h2>
 
         <div class="player">
           <label for="xName">Player X:</label>
-          <input type="text" id="xName" />
+          <input type="text" id="xName" placeholder="John" />
         </div>
 
         <div class="player">
           <label for="xName">Player O:</label>
-          <input type="text" id="oName" />
+          <input type="text" id="oName" placeholder="Doe" />
         </div>
 
-        <button class="btn">Start</button>
+        <button class="btn" id="startBtn">Start</button>
       </div>
 
       <!-- Game Play Area -->
-      <div class="game-play hidden">
+      <div class="game-play hidden" id="gamePlayArea">
         <!-- Players Names Display Area  -->
         <div class="player-display">
           <div>
             <p>Player X:</p>
-            <p>Dulip</p>
+            <p id="displayXPlayer"></p>
           </div>
 
           <div>
             <p>Player O:</p>
-            <p>Sameera</p>
+            <p id="displayOPlayer"></p>
           </div>
         </div>
 
         <!-- Game Board -->
-        <div class="board x">
-          <div class="cell x"></div>
-          <div class="cell o"></div>
-          <div class="cell"></div>
-          <div class="cell"></div>
-          <div class="cell"></div>
-          <div class="cell"></div>
-          <div class="cell"></div>
-          <div class="cell"></div>
-          <div class="cell"></div>
+        <div class="board" id="board">
+          <div class="cell" data-pos="0"></div>
+          <div class="cell" data-pos="1"></div>
+          <div class="cell" data-pos="2"></div>
+          <div class="cell" data-pos="3"></div>
+          <div class="cell" data-pos="4"></div>
+          <div class="cell" data-pos="5"></div>
+          <div class="cell" data-pos="6"></div>
+          <div class="cell" data-pos="7"></div>
+          <div class="cell" data-pos="8"></div>
         </div>
       </div>
 
