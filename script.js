@@ -7,6 +7,12 @@ const GameBoard = (function () {
     _gameBoard[position] = mark;
   }
 
+  // check is full
+  function isFull() {
+    if (_gameBoard.length === 9) return true;
+    return false;
+  }
+
   // reset game board
   function reset() {
     _gameBoard = [];
@@ -19,6 +25,7 @@ const GameBoard = (function () {
 
   return {
     add,
+    isFull,
     reset,
     getGameBoard,
   };
