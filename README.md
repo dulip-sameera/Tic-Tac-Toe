@@ -10,4 +10,4 @@ In this version, two players can play the game.
  * How to use JavaScript Closure
  * This may be a minor, but I learned how to create an X and circle just from CSS :)
 
-[Demo]()
+[Demo](https://dulip-sameera.github.io/Tic-Tac-Toe/)
