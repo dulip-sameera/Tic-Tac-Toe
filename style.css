@@ -1,0 +1,292 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: var(--font);
+    letter-spacing: 0.1rem;
+    color: var(--default-font-color);
+}
+
+:root {
+    --primary-color: #0396A6;
+    --secondary-color: #F2F2F2;
+    --accent-color: #9CD3D8;
+
+    --selected-color: #0B698B;
+
+    --font-primary: var(--secondary-color);
+    --font-secondary: var(--primary-color);
+
+
+    --input-border-color: var(--primary-color);
+    --input-border-focus-color: var(--selected-color);
+
+    --default-font-size : 2rem;
+    --large-font-size: calc(var(--default-font-size) * 2);
+    --small-font-size: calc(var(--default-font-size) * 0.7);
+    --font : 'Roboto', sans-serif;
+    --default-font-color: var(--font-primary);
+    --input-font-color: var(--font-secondary);
+
+    --cell-size: 100px;
+    --cell-border-color: var(--secondary-color);
+
+    --display-name-area-size: calc(var(--cell-size) * 5);
+    --player-name-weight: 700;
+
+    --mark-size: calc(var(--cell-size) * .9);
+
+    --bg-color: var(--primary-color);
+
+    --mark-color: var(--secondary-color);
+    --mark-hover-color: var(--accent-color);
+
+    --btn-primary-color: var(--primary-color);
+    --btn-secondary-color: var(--secondary-color);
+}
+
+body {
+    margin: 0;
+}
+
+.container {
+    width:  100vw;
+    height:  100vh;
+    background-color: var(--bg-color);
+}
+
+
+/* starting page */
+
+.start {
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+.title {
+    font-size: var(--large-font-size);
+}
+
+.sub-title {
+    font-size: var(--small-font-size);
+}
+
+.player {
+    display: grid;
+    grid-template-columns: repeat(2,auto);
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+.player > label {
+    font-size: var(--small-font-size);
+}
+
+.player > input {
+    padding: 1rem 0.5rem;
+    height: var(--small-font-size);
+    font-size: var(--small-font-size);
+    border: 2px solid var(--input-border-color);
+    color: var(--input-font-color);
+    border-radius: 5px;
+    outline: none;
+}
+
+.player > input:focus {
+    border: 2px solid var(--input-border-focus-color);
+}
+
+
+/* Game Board */
+.game-play {
+    height: 100vh;
+    width: 100vw;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+}
+
+/* Players Name Display */
+.player-display {
+    width: var(--display-name-area-size);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 .5rem;
+}
+
+.player-display div {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.player-display div p {
+    font-size: var(--small-font-size);
+}
+
+.player-display div p:hover {
+    cursor: default;
+}
+
+.player-display div p:nth-child(2) {
+    font-weight: var(--player-name-weight);
+}
+
+/* Game Board */
+.board {
+    display: grid;
+    grid-template-columns: repeat(3,auto);
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    align-items: center;
+}
+
+.cell {
+    width: var(--cell-size);
+    height: var(--cell-size);
+    border: 1px solid var(--cell-border-color);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+
+    position: relative;
+}
+
+/* Remove top border of the grid */
+.cell:first-child,
+.cell:nth-child(2),
+.cell:nth-child(3) {
+    border-top: none;
+}
+
+/* Remove bottom border of the grid */
+.cell:last-child,
+.cell:nth-child(8),
+.cell:nth-child(7) {
+    border-bottom: none;
+}
+
+/* Remove left border of the grid */
+.cell:nth-child(3n+1) {
+    border-left: none;
+}
+
+/* Remove right border of the grid */
+.cell:nth-child(3n+3) {
+    border-right: none;
+}
+
+
+/* create X */
+.cell.x::before,
+.cell.x::after,
+.board.x .cell:not(.o):not(.x):hover::before,
+.board.x .cell:not(.o):not(.x):hover::after  {
+    content: '';
+    width: calc(var(--mark-size) * .15);
+    height: var(--mark-size);
+    background-color: var(--mark-color);
+    position: absolute;
+}
+
+
+.cell.x::before,
+.board.x .cell:not(.o):not(.x):hover::before {
+    transform: rotate(45deg);
+}
+
+.cell.x::after,
+.board.x .cell:not(.o):not(.x):hover::after {
+    transform: rotate(-45deg);
+}
+
+
+/* Create circle (o) */
+.cell.o::before,
+.cell.o::after,
+.board.o .cell:not(.o):not(.x):hover::before,
+.board.o .cell:not(.o):not(.x):hover::after {
+    content: '';
+    border-radius: 50%;
+    position: absolute;
+}
+
+.cell.o::before,
+.board.o .cell:not(.o):not(.x):hover::before {
+    width: var(--mark-size);
+    height: var(--mark-size);
+    background-color: var(--mark-color);
+}
+
+.cell.o::after,
+.board.o .cell:not(.o):not(.x):hover::after {
+    width: calc(var(--mark-size)* .7);
+    height: calc(var(--mark-size)* .7);
+    background-color: var(--bg-color);
+}
+
+.board.o .cell:not(.o):not(.x):hover::before,
+.board.x .cell:not(.o):not(.x):hover::before,
+.board.x .cell:not(.o):not(.x):hover::after {
+    background-color: var(--mark-hover-color);
+} 
+
+/* show not allowed if classes already assigned  */
+.cell.x,
+.cell.o {
+    cursor: not-allowed;
+}
+
+
+/* Final Result */
+.result-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    gap: 2rem;
+}
+
+/* General */
+
+.btn {
+    padding: 1rem 2rem;
+    font-size: var(--small-font-size);
+    background-color: var(--btn-primary-color);
+    border: 1px solid var(--btn-secondary-color);
+    border-radius: 5px;
+}
+
+.btn:hover {
+    background-color: var(--btn-secondary-color);
+    border: 1px solid var(--btn-secondary-color);
+    color: var(--btn-primary-color);
+    cursor: pointer;
+    transition: all 200ms ease-in-out;
+}
+
+.hidden {
+    display: none;
+}
