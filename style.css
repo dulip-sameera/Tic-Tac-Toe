@@ -239,7 +239,7 @@ body {
 }
 
 .cell.o::after,
-.board.o .cell:not(.o):not(.x):hover::after {
+.board.o .cell:not(.o):not(.x):hover::after{
     width: calc(var(--mark-size)* .7);
     height: calc(var(--mark-size)* .7);
     background-color: var(--bg-color);
