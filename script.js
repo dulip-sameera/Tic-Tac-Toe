@@ -257,4 +257,34 @@ const DisplayController = (function () {
       });
     }
   }
+
+  // render final result page
+  function finalResult(playerName) {
+    gamePlayArea.classList.toggle("hidden");
+    resultPage.classList.toggle("hidden");
+
+    message.textContent = `${playerName} Wins!`;
+
+    restart.addEventListener("click", reset);
+  }
+
+  // restart the game
+  function reset() {
+    // Hide result page
+    resultPage.classList.toggle("hidden");
+
+    // Display start page
+    startPage.classList.toggle("hidden");
+
+    // Reset Game Play
+    GamePlay.restart();
+
+    // reset game board ui
+    board.className = "board";
+
+    // reset cells ui
+    cells.forEach((cell) => {
+      cell.className = "cell";
+    });
+  }
 })();
