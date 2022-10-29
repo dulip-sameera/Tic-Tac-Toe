@@ -9,8 +9,12 @@ const GameBoard = (function () {
 
   // check is full
   function isFull() {
-    if (_gameBoard.length === 9) return true;
-    return false;
+    if (_gameBoard.length === 9) {
+      for (let i = 0; i < _gameBoard.length; i++) {
+        if (_gameBoard[i] === undefined) return false;
+      }
+      return true;
+    }
   }
 
   // reset game board
@@ -126,6 +130,11 @@ const GamePlay = (function () {
     };
   }
 
+  // check isFull the gameBoard
+  function isFull() {
+    return GameBoard.isFull();
+  }
+
   // reset game
   function restart() {
     _xPlayer = "";
@@ -151,6 +160,7 @@ const GamePlay = (function () {
   return {
     start,
     addMark,
+    isFull,
     restart,
     getXPlayer,
     getOPlayer,
@@ -236,9 +246,10 @@ const DisplayController = (function () {
 
       // check win
       const winner = GamePlay.checkWin(turn);
-      if (winner.winStatus) {
-        finalResult(winner.player.getName());
-      }
+
+      // show final result
+      if (winner.winStatus) finalResult(`${winner.player.getName()} Wins!`);
+      else if (GamePlay.isFull()) finalResult("Draw!");
 
       // change the turn
       if (turn === _xMark) turn = _oMark;
@@ -266,11 +277,11 @@ const DisplayController = (function () {
   }
 
   // render final result page
-  function finalResult(playerName) {
+  function finalResult(resultMassage) {
     gamePlayArea.classList.toggle("hidden");
     resultPage.classList.toggle("hidden");
 
-    message.textContent = `${playerName} Wins!`;
+    message.textContent = resultMassage;
 
     restart.addEventListener("click", reset);
   }
